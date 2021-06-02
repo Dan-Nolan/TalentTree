@@ -17,12 +17,11 @@ describe("Game", function() {
 
     const tx = await game.chooseTalent(warriorCID);
     const receipt = await tx.wait();
-    const talentChosen = receipt.events.find(x => x.event === "TalentChosen");
-
-    console.log(talentChosen);
-
-    console.log(talentChosen.args[1].constructor());
 
     assert(await game.talents(addr1, warriorCID));
+
+    const talentChosen = receipt.events.find(x => x.event === "TalentChosen");
+
+    assert.equal(await talentChosen.args[2], warriorCID);
   });
 });

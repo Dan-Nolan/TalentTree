@@ -16,12 +16,12 @@ contract Game {
 		points[user] += 1;
 	}
 
-  event TalentChosen(address indexed chooser, string indexed cid);
+  event TalentChosen(address indexed chooser, string indexed cidHash, string cid);
 
 	function chooseTalent(string memory cid) public {
 		require(points[msg.sender] > 0);
 		talents[msg.sender][cid] = true;
 		points[msg.sender]--;
-    emit TalentChosen(msg.sender, cid);
+    emit TalentChosen(msg.sender, cid, cid);
 	}
 }
